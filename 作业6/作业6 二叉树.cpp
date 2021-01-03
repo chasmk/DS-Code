@@ -73,8 +73,8 @@ void displayTree(tnode<T>* root,int num)//由影子树正向打印二叉树
 	int level;
 	int curlevel;
 	bool flag = true;
-	column = 0;
-	int curcolumn = 0;
+	column = 0;//上个输出的结点的column值
+	int curcolumn = 0;//当前结点的column
 	while (!q.empty())//每次输出队头结点，再把它的左右儿子入队
 	{
 		p = q.front();
@@ -89,7 +89,7 @@ void displayTree(tnode<T>* root,int num)//由影子树正向打印二叉树
 		//赋当前值
 		curlevel = p->level;
 		curcolumn = p->column;
-		if (curlevel != level)//一行输出完后换行
+		if (curlevel != level)//层数不一致，说明该换行了
 		{
 			level = curlevel;
 			column = p->column;
@@ -103,10 +103,10 @@ void displayTree(tnode<T>* root,int num)//由影子树正向打印二叉树
 		}
 		q.pop();
 		for (int i = 0; i < len; i++)cout << " ";
-		if(num==1)
+		if(num==1)//按字符输出
 			cout << (char)stoi(p->nodeValueStr);
 		else
-		cout << p->nodeValueStr;/*<<p->column*/;
+			cout << p->nodeValueStr;/*<<p->column*/;
 		if (p->left != NULL)	q.push(p->left);
 		if (p->right != NULL)	q.push(p->right);
 	}
